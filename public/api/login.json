@@ -1,0 +1,9 @@
+{
+  "success":true,
+  "data":{
+    "token":"TOKE_ABACD",
+    "username":"faty@fz.com",
+    "password":"azerty"
+  },
+  "errors":["error1","error2"]
+}
