@@ -8,9 +8,17 @@ class SignUp extends Component {
   render() {
     const props = this.props;
     return (
-      <div style={{width: '50%',margin:'auto'}}>
-       <SignUpForm submitLabel={"OK ok"} {...props}/>
-        <p>Already have a account ? <Link to="/signin">Sign In</Link></p>
+      <div className="row main">
+        <div className="panel-heading">
+           <div className="panel-title text-center">
+           		<h1 className="title">SHOPS</h1>
+           		<hr />
+           	</div>
+        </div>
+        <div className="main-login main-center">
+         <SignUpForm submitLabel={"OK ok"} {...props}/>
+          <p>Already have a account ? <Link to="/signin">Sign In</Link></p>
+        </div>
       </div>
     )
   }

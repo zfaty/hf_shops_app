@@ -7,8 +7,9 @@ import {
 import SignIn from './pages/signin';
 import SignUp from './pages/signup';
 import Home from './pages/home';
+import 'font-awesome/css/font-awesome.min.css';
 import './styles/bootstrap.css'
-import './App.css';
+import './styles/main.css';
 
 
 const PrivateRoute = ({ component: Component, ...rest }) => {

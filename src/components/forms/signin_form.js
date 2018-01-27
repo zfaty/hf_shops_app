@@ -64,20 +64,31 @@ class SignInForm extends Component {
   render() {
     const { errors } = this.state
     return (
-      <form onSubmit={this.handleSubmit} className="App-intro">
-        {!!errors.length &&
-              errors.map((error, i) => <span key={i}>{error}</span>)}
-
-        <label style={{display: 'block'}}>
-          Email:
-          <input type="text" name="email" value={this.state.email} onChange={this.handleInputChange} />
-        </label>
-        <label style={{display: 'block'}}>
-          Password:
-          <input type="text" name="password" value={this.state.password} onChange={this.handleInputChange} />
-        </label>
-        <input style={{display: 'block'}} type="submit" value={this.props.submitLabel} />
-      </form>
+      <form className="form-horizontal" onSubmit={this.handleSubmit}>
+      {!!errors.length &&
+                  errors.map((error, i) => <div className="alert alert-danger" key={i}>{error}</div>)}
+      <div className="form-group">
+        <label className="cols-sm-2 control-label">Your Email</label>
+        <div className="cols-sm-10">
+           <div className="input-group">
+             <span className="input-group-addon"><i className="fa fa-envelope fa" aria-hidden="true"></i></span>
+             <input type="email" className="form-control" name="email" id="email"  placeholder="Enter your Email"
+                   value={this.state.email} onChange={this.handleInputChange} required />
+           </div>
+         </div>
+       </div>
+       <div className="form-group">
+       <label className="cols-sm-2 control-label">Password</label>
+         <div className="cols-sm-10">
+            <div className="input-group">
+              <span className="input-group-addon"><i className="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+              <input type="password" className="form-control" name="password" placeholder="Enter your Password"
+                    value={this.state.password} onChange={this.handleInputChange} required />
+            </div>
+          </div>
+        </div>
+       <input className="btn btn-primary btn-lg btn-block login-button" type="submit" value="Register" />
+     </form>
     );
   }
 }

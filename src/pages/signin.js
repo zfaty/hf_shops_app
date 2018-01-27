@@ -8,9 +8,11 @@ class SignIn extends Component {
   render() {
     const props = this.props;
     return (
-      <div style={{width: '50%',margin:'auto'}}>
+      <div className="row main">
+      <div className="main-login main-center">
        <SignInForm submitLabel={"OK"} {...props}/>
-        <p>Create an account? <Link to="/signup">Sign Up</Link></p>
+        <p>New User ?  <Link to="/signup">Create new account</Link></p>
+      </div>
       </div>
     )
   }
