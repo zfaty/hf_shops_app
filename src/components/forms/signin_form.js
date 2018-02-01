@@ -87,7 +87,7 @@ class SignInForm extends Component {
             </div>
           </div>
         </div>
-       <input className="btn btn-primary btn-lg btn-block login-button" type="submit" value="Register" />
+       <input className="btn btn-primary btn-lg btn-block login-button" type="submit" value="SignIn" />
      </form>
     );
   }
