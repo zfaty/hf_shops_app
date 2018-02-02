@@ -35,19 +35,22 @@ class SignInForm extends Component {
   signin(form_data) {
     console.error('sendRequest', form_data);
     sendRequest(
-      '/api/login.json',
+      '/api/signin',
       {
-        method: 'get',
+        method: 'post',
+        body: JSON.stringify(form_data),
         headers: {
-          'content-type': 'application/json'
+          'Content-Type': 'application/json'
         }
       },
       false
     )
     .then(result => result.json())
     .then(response => {
+      console.log("Tokkkken 1",response);
       if (response.success) {
-        const token = response.data.token
+        console.log("Tokkkken 2",response);
+        const token = response.data.value
         localStorage.setItem('user_token', token)
         this.props.history.push('/')
       } else {

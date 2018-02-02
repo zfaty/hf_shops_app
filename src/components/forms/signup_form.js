@@ -28,8 +28,10 @@ class SignUpForm extends Component {
     console.log("ttttt1");
     const form_data = {
       email: this.state.email,
-      password: this.state.password,
-      confpassword:this.state.confpassword
+      password: {
+        password: this.state.password,
+        confpassword:this.state.confpassword
+      }
     }
    this.setState({ errors: [] }, () => this.signup(form_data))
   }
@@ -37,19 +39,22 @@ class SignUpForm extends Component {
   signup(form_data) {
     console.error('sendRequest', form_data);
     sendRequest(
-      '/api/login.json',
+      '/api/signup',
       {
-        method: 'get',
+        method: 'post',
+        body: JSON.stringify(form_data),
         headers: {
-          'content-type': 'application/json'
+          'Content-Type': 'application/json'
         }
       },
       false
     )
     .then(result => result.json())
     .then(response => {
+      console.log("1 Tokkkken",response);
       if (response.success) {
-        const token = response.data.token
+        const token = response.data.value
+        console.log("Tokkkken",response);
         localStorage.setItem('user_token', token)
         this.props.history.push('/')
       } else {

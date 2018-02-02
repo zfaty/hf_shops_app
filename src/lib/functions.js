@@ -3,17 +3,18 @@ const sendRequest = (
   options = { method: 'get' },
   useAuthorization = true
 ) => {
-  const token = localStorage.getItem('token')
+  console.log("toekn",localStorage.getItem('user_token'));
+  const token = localStorage.getItem('user_token');//localStorage.getItem('token')
   const { headers = {}, ...rest } = options
   let newHeaders = headers
   // append Authorization header to headers
   if (useAuthorization) {
     newHeaders = Object.assign(newHeaders, {
-      "X-Auth-Token" : "ZHHyc5KAzOJB8TpIBNhbfGhMmUEouYhVuKnq4DbcDrO0WaaMqzO3M5sB0rMPJQ6HncQ=",
-      Accept: 'application/json'
+      "X-Auth-Token": token,
     })
   }
-  var full_url = "http://rest-api.local"+url;
+  console.log(" process.env.API_URL",process.env);
+  var full_url = process.env.REACT_APP_API_URL+url;
   return fetch(full_url, { ...rest, headers: newHeaders })
 }
 

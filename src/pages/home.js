@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
 import TopMenu from '../components/top_menu';
+import ShopItem from '../components/shop_item';
 import { sendRequest, getCurrentPosition } from '../lib/functions';
 
 class Home extends Component {
 
-  state = {
-    selectedShops: 'near',
-    shops: {
-      near: [],
-      preferred: []
-    }
-  }
   constructor(props) {
     super(props);
     this.state = {nearbyshops: []};
@@ -32,15 +26,21 @@ class Home extends Component {
 
   getShopsNearBy(position) {
     const { latitude, longitude } = position.coords
-    sendRequest(`/api/shops/nearby?latitude=${latitude}&longitude=${longitude}`)
-      .then(resp => {
-        if (resp.status === 200) return resp.json()
-        if (resp.status === 401) this.props.history.push('/signin')
+    sendRequest(`/api/shops/nearby?page=1&latitude=${latitude}&longitude=${longitude}`)
+      .then(response => {
+        console.log("response ",response);
+        if (response.status === 200) return response.json();
+        if (response.status === 500) this.props.history.push('/signin')
         else throw new Error('failed to load shops')
       })
-      .then(dt => {
-        if (dt) {
-          console.log('data',dt);
+      .then(data => {
+        console.log("shopsshops data",data);
+        if (data) {
+          this.setState(state => {
+            state.nearbyshops = data.data
+            console.log("shopsshops",state);
+            return state
+          })
         }
       })
       .catch(err => {
@@ -49,21 +49,19 @@ class Home extends Component {
   }
 
   render() {
+      const { nearbyshops } = this.state;
+      console.log("shopss",nearbyshops);
       return (
       <div className="container">
       <TopMenu/>
       <div className="container">
           <div className="shop_list_warpper">
-            <div className="shop_item">
-              <div className="shop_name">My shop</div>
-              <div className="shop_image_warpper">
-                <img alt="item_1" src="http://placehold.it/150x150"></img>
-              </div>
-              <div className="button_group">
-                  <input className="btn btn-primary btn-md" type="button" value="disLike" />
-                  <input className="btn btn-primary btn-md" type="button" value="Like" />
-              </div>
-            </div>
+              {nearbyshops.map(shop => (
+                <ShopItem
+                key={shop.id}
+                shop_detail={shop}
+                 />
+              ))}
           </div>
       </div>
       </div>
