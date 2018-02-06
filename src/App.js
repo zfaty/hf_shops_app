@@ -7,10 +7,10 @@ import {
 import SignIn from './pages/signin';
 import SignUp from './pages/signup';
 import Home from './pages/home';
+import Preferred from './pages/preferred_shop';
 import 'font-awesome/css/font-awesome.min.css';
-import './styles/bootstrap.css'
+import './styles/bootstrap.css';
 import './styles/main.css';
-
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   return (
@@ -35,7 +35,8 @@ class App extends Component {
     return (
       <Router>
         <div className="container">
-          <PrivateRoute path="/" component={Home}/>
+          <PrivateRoute path="/preferred" component={Preferred}/>
+          <PrivateRoute path="/nearby" component={Home}/>
           <Route path="/signup" component={SignUp}/>
           <Route path="/signin" component={SignIn}/>
           <Route

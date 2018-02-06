@@ -47,12 +47,10 @@ class SignInForm extends Component {
     )
     .then(result => result.json())
     .then(response => {
-      console.log("Tokkkken 1",response);
       if (response.success) {
-        console.log("Tokkkken 2",response);
         const token = response.data.value
         localStorage.setItem('user_token', token)
-        this.props.history.push('/')
+        this.props.history.push('/nearby')
       } else {
         const { errors = [] } = response
         this.setState(state => {

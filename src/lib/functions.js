@@ -3,7 +3,7 @@ const sendRequest = (
   options = { method: 'get' },
   useAuthorization = true
 ) => {
-  console.log("toekn",localStorage.getItem('user_token'));
+  console.log("token",localStorage.getItem('user_token'));
   const token = localStorage.getItem('user_token');//localStorage.getItem('token')
   const { headers = {}, ...rest } = options
   let newHeaders = headers

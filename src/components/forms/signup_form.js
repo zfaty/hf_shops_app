@@ -25,7 +25,6 @@ class SignUpForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log("ttttt1");
     const form_data = {
       email: this.state.email,
       password: {
@@ -51,12 +50,10 @@ class SignUpForm extends Component {
     )
     .then(result => result.json())
     .then(response => {
-      console.log("1 Tokkkken",response);
       if (response.success) {
         const token = response.data.value
-        console.log("Tokkkken",response);
         localStorage.setItem('user_token', token)
-        this.props.history.push('/')
+        this.props.history.push('/nearby')
       } else {
         const { errors = [] } = response
         this.setState(state => {

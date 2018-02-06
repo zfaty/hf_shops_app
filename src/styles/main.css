@@ -95,17 +95,22 @@ input::-webkit-input-placeholder {
 .shop_image{
   width: 100%;
 }
+img{
+  width: 100%;
+}
 .button_group{
   display: flex;
   justify-content: flex-end;
   padding: 5px 0;
 }
-.dislike-btn{
+.dislike-btn,.dislike-btn:hover{
   background-color: red;
-      margin: 0px 15px;
 }
 
-.like-btn{
+.like-btn,.like-btn:hover{
   background-color: green;
-      margin: 0px 15px;
+  margin-left: 6px;
+}
+.active{
+  text-decoration: underline;
 }

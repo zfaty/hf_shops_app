@@ -3,28 +3,28 @@ import TopMenu from '../components/top_menu';
 import ShopItem from '../components/shop_item';
 import { sendRequest, getCurrentPosition } from '../lib/functions';
 
-class Home extends Component {
+class Preferred extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {nearbyshops: []};
-
+    this.state = {preferredshops: []};
   }
+
   componentDidMount() {
     this.getShops()
   }
+
   getShops() {
     if ('geolocation' in navigator) {
       getCurrentPosition(
-        position => this.getShopsNearBy(position),
+        position => this.getShopsPreferred(position),
         this.positionError
       )
     }
   }
 
-  getShopsNearBy(position) {
-    const { latitude, longitude } = position.coords
-    sendRequest(`/api/shops/nearby?page=1&latitude=${latitude}&longitude=${longitude}`)
+  getShopsPreferred(position) {
+    sendRequest(`/api/shops/preferred`)
       .then(response => {
         console.log("response ",response);
         if (response.status === 200) return response.json();
@@ -32,10 +32,9 @@ class Home extends Component {
         else throw new Error('failed to load shops')
       })
       .then(data => {
-        console.log("shopsshops data",data);
         if (data) {
           this.setState(state => {
-            state.nearbyshops = data.data
+            state.preferredshops = data.data
             console.log("shopsshops",state);
             return state
           })
@@ -47,11 +46,11 @@ class Home extends Component {
   }
   handelAction(action,shop_id){
 
-    sendRequest(`/api/shop/${action}/${shop_id}`, { method: 'post' })
+    sendRequest(`/api/shop/${action}/${shop_id}`, { method: 'delete' })
       .then(response => {
         console.log("response ",response);
         if (response.status === 200) return response.json();
-        if (response.status === 500) this.props.history.push('/signin')
+        if (response.status === 400) this.props.history.push('/signin')
         else throw new Error('failed to load shops')
       })
       .then(data => {
@@ -61,8 +60,8 @@ class Home extends Component {
           this.setState(
             state => {
               console.log("ddrrr",shop_id);
-              // remove liked shop from current state
-              state.nearbyshops = state.nearbyshops.filter(
+              // remove unliked shop from current state
+              state.preferredshops = state.preferredshops.filter(
                 shop => shop.id !== shop_id
               )
               return state
@@ -74,22 +73,22 @@ class Home extends Component {
         //Todo :Handel error
       })
   }
-
   render() {
-      const { nearbyshops } = this.state;
+      const { preferredshops } = this.state;
       const handelAction = this.handelAction.bind(this);
-      console.log("shopss",nearbyshops);
+      console.log("shopss preferredshops",preferredshops);
       return (
       <div className="container">
-      <TopMenu selected_page={"nearby"}/>
+      <TopMenu selected_page={"preferred"}/>
       <div className="container">
           <div className="shop_list_warpper">
-              {nearbyshops.map(shop => (
+              {preferredshops.map(shop => (
                 <ShopItem
                 key={shop.id}
-                shop_detail={shop}
-                shop_page={"nearby"}
-                handelAction = {handelAction}
+                shop_detail={shop.shop}
+                preferred_id={shop.id}
+                shop_page={"preferred"}
+                handelAction={handelAction}
                  />
               ))}
           </div>
@@ -99,4 +98,4 @@ class Home extends Component {
   }
 }
 
-export default Home
+export default Preferred
