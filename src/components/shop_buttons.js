@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
 
 class ShopButtons extends Component {
 
   render() {
     const {shop_id,shop_page,handelAction,...rest} = this.props;
-    console.log('ppp',rest.preferred_id);
+
     if(shop_page === "nearby"){
       return (
         <div className="button_group">

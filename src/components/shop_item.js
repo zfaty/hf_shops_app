@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import ShopButtons from './shop_buttons';
 
 class ShopItem extends Component {

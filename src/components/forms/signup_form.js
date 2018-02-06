@@ -53,7 +53,7 @@ class SignUpForm extends Component {
       if (response.success) {
         const token = response.data.value
         localStorage.setItem('user_token', token)
-        this.props.history.push('/nearby')
+        this.props.history.push('/')
       } else {
         const { errors = [] } = response
         this.setState(state => {

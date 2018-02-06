@@ -8,7 +8,7 @@ import SignIn from './pages/signin';
 import SignUp from './pages/signup';
 import Home from './pages/home';
 import Preferred from './pages/preferred_shop';
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import {NotificationContainer} from 'react-notifications';
 import 'font-awesome/css/font-awesome.min.css';
 import './styles/bootstrap.css';
 import './styles/main.css';
@@ -38,7 +38,7 @@ class App extends Component {
       <Router>
         <div className="container">
           <PrivateRoute path="/preferred" component={Preferred}/>
-          <PrivateRoute path="/nearby" component={Home}/>
+          <PrivateRoute path="/" component={Home}/>
           <Route path="/signup" component={SignUp}/>
           <Route path="/signin" component={SignIn}/>
           <Route

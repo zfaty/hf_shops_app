@@ -28,7 +28,7 @@ class Home extends Component {
     sendRequest(`/api/shops/nearby?page=1&latitude=${latitude}&longitude=${longitude}`)
       .then(response => {
         if (response.status === 200) return response.json();
-        if (response.status === 500) this.props.history.push('/signin')
+        if (response.status === 400) this.props.history.push('/signin')
         else throw new Error('failed to get shops')
       })
       .then(data => {
