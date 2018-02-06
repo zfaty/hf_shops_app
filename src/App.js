@@ -8,9 +8,11 @@ import SignIn from './pages/signin';
 import SignUp from './pages/signup';
 import Home from './pages/home';
 import Preferred from './pages/preferred_shop';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 import 'font-awesome/css/font-awesome.min.css';
 import './styles/bootstrap.css';
 import './styles/main.css';
+import 'react-notifications/lib/notifications.css';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   return (
@@ -46,6 +48,7 @@ class App extends Component {
                return <Redirect to="/signin" />
              }}
           />
+          <NotificationContainer/>
         </div>
       </Router>
     );
